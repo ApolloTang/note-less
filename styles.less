@@ -1,0 +1,26 @@
+
+.ex-abc {
+    &:extend(.abc);
+    background: blue;
+}
+
+.abc {
+    border: 1px solid red;
+}
+
+/* - - - - - - - -  */
+
+.b {
+    border: 1px solid red;
+}
+
+.ex-b:extend(.b) {
+    background-color: blue;
+}
+
+// the above block does the same thing as the below block
+.ex-b-2 {
+    &:extend(.b);
+    background-color: blue;
+}
+

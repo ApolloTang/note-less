@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>lab less</title>
+    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <!-- set options before less.js script -->
+    <script>
+        less = {
+        env: "development",
+             async: false,
+             fileAsync: false,
+             poll: 1000,
+             functions: {},
+             dumpLineNumbers: "comments",
+             relativeUrls: false,
+             rootpath: ":/a.com/"
+        };
+    </script>
+    <script src="bower_components/less/dist/less.js"></script>
+
+</head>
+
+<body>
+
+<div class="abc" >.abc</div>
+<div class="ex-abc" >ex</div>
+<hr>
+
+<div class="b" >b</div>
+<div class="ex-b">ex-b</div>
+
+<hr>
+
+<div class="b" >b</div>
+<div class="ex-b-2">ex-b-2</div>
+
+</body>
+
+</html>
