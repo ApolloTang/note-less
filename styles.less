@@ -3,15 +3,30 @@
 }
 
 .ex-b:extend(.b) {
-    background-color: blue;
+    background-color: hsl(0, 0%, 50%);
+    color: white;
 }
 
 // the above block does the same thing as the below block
 .ex-b-2 {
     &:extend(.b);
-    background-color: blue;
+    background-color: hsl(0, 0%, 50%);
+    color: white;
 }
 
-.bootstrap-ul {
-    border: 1px solid red;
+
+.list {
+    background-color: hsl(0, 0%, 80%,);
+    li {
+        background-color: hsl(0, 0%, 50%,);
+        li {
+            background-color: hsl(0, 0%, 20%,);
+        }
+    }
 }
+
+
+.extended:extend(.list) {
+    border: 1px red solid;
+}
+
