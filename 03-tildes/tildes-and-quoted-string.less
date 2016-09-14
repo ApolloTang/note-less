@@ -1,0 +1,77 @@
+
+
+// Less didn't look at the quoted string and "unwrap" it during compilation;
+// it simply rendered it as a token literally.
+
+    body {
+        @unquoted: hello world ;
+        @quoted: "hello world" ;
+        @tildeQuoted: ~"hello world";
+
+        unquoted: @unquoted ;        // --> unquoted: hello world;
+        quoted: @quoted ;            // --> quoted: "hello world";
+        tildeQuoted: @tildeQuoted ;  // --> tildeQuoted: hello world;
+    }
+
+// As you can see above, quote characters showing up in your compiled CSS output.
+//
+// If you don't want quote to show up in your compiled css output, put a tilde before
+// first quote.
+//
+// The use case for this is when you want to tread multiple tokens as a sigle value:
+
+    .transition( @properties ) {
+        transition: @properties ;
+    }
+
+    body {
+        .transition( ~"top 1s ease, left 1s ease" ) ; // --> transition: top 1s ease, left 1s ease;
+    }
+
+// That is what the tilde does - strip quotes. It does nothing else.
+//
+// Without tilde your compiled css will be invalid:
+
+    body {
+        .transition( "top 1s ease, left 1s ease" ) ; // --> transition: "top 1s ease, left 1s ease";
+    }
+
+// We know that the above is invalue becasue value of transition property can not contain quote.
+//
+// You might have naively think the above can be solve by removing the quote, but
+// removing the the quote will make the comma into a delimiter of arguments pass to the mixin.
+
+
+    body {
+        .transition( top 1s ease, left 1s ease ) ; // --> transition: top 1s ease;
+    }
+
+// In the above, the string, "left 1s ease" is missing in the compliled css
+// becuase it is the second parameter that pass in.
+//
+// Alternatively, this can be solved by ending the arguments list with a semi-column:
+
+    body {
+        .transition( top 1s ease, left 1s ease ; ) ; // --> transition: top 1s ease ;
+    }
+
+// Semi column tell less to stop treating commas as delimiters (becasue the semi column is the delimiter)
+
+// On the side note, Less is smart enough to not double-up on quotes
+// during *variable interpolation* to end up with double quote accumulation.
+
+
+    body {
+        @foo: "hello" ;
+        @bar: "@{foo}" ;
+        @baz: "@{bar}" ;
+
+        content: @baz ; // <-- content: "hello"; /// not content: """hello""";
+    }
+
+
+
+
+
+
+
